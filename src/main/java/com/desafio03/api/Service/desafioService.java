@@ -1,8 +1,9 @@
 package com.desafio03.api.Service;
 
-
 import com.desafio03.api.model.segundoDesafioModel;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class desafioService {
@@ -11,25 +12,33 @@ public class desafioService {
 
         segundoDesafioModel model = new segundoDesafioModel();
 
+        List<String> vogais= new ArrayList<>();
+        vogais.add("A");
+        vogais.add("a");
+        vogais.add("E");
+        vogais.add("e");
+        vogais.add("I");
+        vogais.add("i");
+        vogais.add("O");
+        vogais.add("o");
+        vogais.add("U");
+        vogais.add("u");
 
-        // char[] vogal = {'a', 'e', 'i','o', 'u'};
-        // char[] consoante;
-
-        String vogal = "";
-        int consoante = 0;
+        List<String> vogaisEncontradas = new ArrayList<>();
+        List<String> consoantesEncontradas = new ArrayList<>();
 
         for (int i = 0; i < frase.length(); i++) {
-            char vogaisDaFrase = frase.charAt(i);
-            if (vogaisDaFrase == 'a' || vogaisDaFrase == 'e' ||
-                    vogaisDaFrase == 'i' || vogaisDaFrase == 'o' || vogaisDaFrase == 'u') {
-                vogal = String.valueOf(vogaisDaFrase);
+            String c = frase.substring(i, i + 1);
+            if (vogais.contains(c)) {
+                vogaisEncontradas.add(c);
             } else {
-                consoante++;
+                consoantesEncontradas.add(c);
             }
         }
+
         model.setRetornoNome(frase);
-        model.setVogais(vogal);
-        model.setConsoantes(consoante);
+        model.setVogaisRetorno(vogaisEncontradas);
+        model.setConsoantesRetorno(consoantesEncontradas);
 
         return model;
     }
